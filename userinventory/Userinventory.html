@@ -22,7 +22,9 @@
 </head>
 <body style = "background: url(../image.jpg)">
     <script>
-    var databaseref = firebase.database().ref().child('AuthorIds').child('202164608645988354');
+    var indexofsplice = document.URL.indexOf('.html');
+    var idToUse = document.URL.slice(indexofsplice + 6);
+    var databaseref = firebase.database().ref().child('AuthorIds').child(idToUse);
     databaseref.once('value').then(function(snapshot){
     if(snapshot.exists()){
      KeyIds = snapshot.val();
@@ -32,6 +34,8 @@
         var itemname = KeyIds[specificKey].Item;
         document.body.innerHTML += `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">Item #${itemNum}: ${itemname}</div>`;
      }
+    }else{
+        document.body.innerHTML = `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">That user doesn't have an inventory!</div>`
     }
     });
     </script>
