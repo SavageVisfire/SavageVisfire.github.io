@@ -38,6 +38,8 @@
             var itemRarity = KeyIds.RarityLevel;
             var itemCrate = KeyIds.Crate;
             var itemDate = KeyIds.DateOpened;
+            console.log(itemPainted);
+            console.log(itemCertified);
             if(itemCertified == 'true' && itemPainted == 'true'){
                 document.body.innerHTML += `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">Item Name: ${itemPaint} ${itemCert} ${itemName}</div>`;
             }else if(itemCertified == 'true' && itemPainted == 'false'){
