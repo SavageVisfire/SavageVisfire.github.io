@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Inventory</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-database.js"></script>
     <script>
@@ -19,6 +18,11 @@
     };
     firebase.initializeApp(config);
     </script>
+    <style>
+    a{
+        text-decoration: none;
+    } 
+    </style>
 </head>
 <body style = "background: url(../image.jpg);background-repeat: no-repeat; background-attachment: fixed;">
     <script>
@@ -32,7 +36,7 @@
      for(itemNum = 0;itemNum<keys.length;itemNum++){
         var specificKey=keys[itemNum];
         var itemname = KeyIds[specificKey].Item;
-        document.body.innerHTML += `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">Item #${itemNum}: ${itemname}</div>`;
+        document.body.innerHTML += `<a href="https://savagevisfire.github.io/userinventory/ItemDetails.html?${idToUse}?${specificKey}"> <div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">Item #${itemNum + 1}: ${itemname} </div> </a>`;
      }
     }else{
         document.body.innerHTML = `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">That user doesn't have an inventory!</div>`

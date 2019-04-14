@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title id = "title"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-database.js"></script>
+    <script>
+    var config = {
+        apiKey: "AIzaSyCdvfOyvuu9jC3zgKsSNUDSNDPdNZNVzQ4",
+        authDomain: "rlcratebot.firebaseapp.com",
+        databaseURL: "https://rlcratebot.firebaseio.com",
+        projectId: "rlcratebot",
+        storageBucket: "rlcratebot.appspot.com",
+        messagingSenderId: "558693831090"
+    };
+    firebase.initializeApp(config);
+    </script>
+</head>
+<body style = "background: url(../image.jpg);background-repeat: no-repeat; background-attachment: fixed;">
+    <script>
+    var arrayForQuestionMarks = document.URL.split('?');
+    if(arrayForQuestionMarks.length = 3){
+        idToUse = arrayForQuestionMarks[1];
+        itemIdToUse = arrayForQuestionMarks[2];
+        var databaseref = firebase.database().ref().child('AuthorIds').child(idToUse).child(itemIdToUse);
+        databaseref.once('value').then(function(snapshot){
+        if(snapshot.exists()){
+            KeyIds = snapshot.val();
+            var keys = Object.keys(KeyIds);
+            var itemName = KeyIds.Item;
+            var itemPainted = KeyIds.Painted;
+            var itemCertified = KeyIds.Certified;
+            var itemCert = KeyIds.CertName;
+            var itemPaint = KeyIds.PaintName;
+            var itemRarity = KeyIds.RarityLevel;
+            var itemCrate = KeyIds.Crate;
+            var itemDate = KeyIds.DateOpened;
+            if(itemCertified == 'true' && itemPainted == 'true'){
+                document.body.innerHTML += `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">Item Name: ${itemPaint} ${itemCert} ${itemName}</div>`;
+            }else if(itemCertified == 'true' && itemPainted == 'false'){
+                document.body.innerHTML += `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">Item Name: ${itemCert} ${itemName}</div>`;
+            }else if(itemCertified == 'false' && itemPainted == 'true'){
+                document.body.innerHTML += `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">Item Name: ${itemPaint} ${itemName}</div>`;
+            }else if(itemCertified == 'false' && itemPainted == 'false'){
+                document.body.innerHTML += `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">Item Name: ${itemName}</div>`;
+            }
+            document.body.innerHTML += `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">Crate: ${itemCrate}</div>`;
+            document.body.innerHTML += `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">Date Opened: ${itemDate}</div>`;
+        }else{
+            document.body.innerHTML += `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">That Item Doesn't Exist!</div>`;
+        }
+        });
+    }else{
+        document.body.innerHTML += `<div style="color:rgb(255,255,255);font-family: 'Bangers', cursive; text-align:center;font-size:20px;padding-bottom:20px;">That Item Doesn't Exist!</div>`;
+    }
+    </script>
+</body>
+</html>
